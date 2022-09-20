@@ -202,7 +202,7 @@ sub setting
     #     }} reverse @ele;
     # `sed -i '/ATOMIC_SPECIES/a $_  $HEA{$_}{mass}  $HEA{$_}{jsonname}' $foldername/$prefix.in`;
         #   for(@ele){
-        my @eles = reverse sort (@ele);
+        my @eles = reverse (@ele);
         # `sed -i '/ATOMIC_SPECIES/a $eles  $HEA{$eles}{mass}  $HEA{$eles}{jsonname}' $foldername/$prefix.in`;
         # }
         for(@eles){
@@ -238,7 +238,7 @@ sub ibrav0
     my $xz = 0;
     my $yz = 0;
 
-    for(reverse @data){
+    for(@data){
     ###atoms###
         if(m/(\d+)\s+atoms/s){ 
         $atoms = $1;

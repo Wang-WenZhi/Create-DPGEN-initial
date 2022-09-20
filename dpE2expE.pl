@@ -53,7 +53,7 @@ for my $id (0..$#out_file){
    # print "$out_file[$id]";
     print "$out_filename[$id]\n";
 open my $all ,"< $out_file[$id]";
-# print "$out_file[$id]";
+print "$out_file[$id]";
 my @all = <$all>;
 close($all);
 my $natom = `cat $out_file[$id]|sed -n '/number of atoms\\/cell/p' | sed -n '\$p'| awk '{print \$5}'`;
@@ -89,7 +89,7 @@ my @QECohesiveEnergy = ("-175.48997499", "-403.78549009", "-343.28297981", "-11.
 my $sumQECohesiveEnergy = 0;
 # my @qwe = @QECohesiveEnergy[$element{$coord[-$_][0]}-1] for @atomss;
 # print "@qwe";
-$sumQECohesiveEnergy += @QECohesiveEnergy[$element{$coord[-$_][0]}-1] for @atomss;#Rydberg Constant
+$sumQECohesiveEnergy += @QECohesiveEnergy[$myelement{$coord[-$_][0]}-1] for @atomss;#Rydberg Constant
 my $sumQECohesiveEnergyeV = $sumQECohesiveEnergy*13.6056980659;#eV
 ###----------Calculate QEdftBEi--------------------
 my $QEdftBEi = $sumQECohesiveEnergyeV/$natom;
@@ -100,7 +100,8 @@ print $data "dftBE_all = $sumQECohesiveEnergyeV\n";#eV
 my @CohesiveEnergy = ("-4.10", "-3.49", "-4.44", "-4.63", "-1.35");# !!!Ag(-2.95) Ge(-3.85) Mn(-2.92) Sb(-2.75) Te(-2.19) eV/atom
 ###-----------Calculate CohesiveEnergy------------
 my $sumCohesiveEnergy = 0;
-$sumCohesiveEnergy += @CohesiveEnergy[$element{$coord[-$_][0]}-1] for @atomss;
+$sumCohesiveEnergy += @CohesiveEnergy[$myelement{$coord[-$_][0]}-1] for @atomss;
+
 ###----------Calculate dftBEi---------------------
 my $expdftBEi = $sumCohesiveEnergy/$natom;
 ###-----------------------------------------------
